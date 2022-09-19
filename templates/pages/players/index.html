@@ -4,6 +4,57 @@
 {% block content %}
 
 <div class="flex flex-col h-full items-center overflow-scroll pt-10 ">
-    {% include 'components/playerCard/index.html' %}
+    {% for player in cardItem %}
+    <div
+    id="CardPlayerGrid"
+    class="grid grid-cols-3 mb-10 flex-row bg-white w-[90vw] h-[25vw] px-[2rem] py-[1rem] items-center justify-items-center"
+    >
+    <div class="border-r border-black w-full">
+        <p id="NumberContainer" class="text-center font-FasterOne text-[15vw]">{{player.pk}}</p>
+    </div>
+    <div>
+        <div class="w-[18vw]">
+        <img src="static/images/player1.jpg" alt="" />
+        </div>
+    </div>
+    <div
+        class="border-l w-full h-full border-black px-5 font-BebasKai text-[2vw]"
+    >
+        <p class="text-[5vw] border-y border-black leading-[5vw]">
+        {{player.name}}
+        </p>
+        <p class="">EQUIPO: {{player.team}}</p>
+        <p class="">EDAD: {{player.age}}</p>
+        <p class="">Posicion: {{player.position}}</p>
+        <p class="">Numero de camiseta: {{player.number}}</p>
+
+        <div class='flex flex-row justify-end'>
+            <a href="{{'EditarJugador/'}}{{player.pk}}">
+              <div class="w-[3vw] mr-[2vw]">
+                <img src="static/images/editar.png" alt="" />
+              </div>
+            </a>
+            <a href="{{'BorrarJugador/'}}{{player.pk}}">
+              <div class="w-[3vw]">
+                <img src="static/images/delete.png" alt="" />
+              </div>
+            </a>
+
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    <a href="RegistrarJugador">
+    <div
+        id="CardPlayerGrid"
+        class="flex flex-row bg-white w-[90vw] h-[25vw] px-[2rem] py-[1rem] items-center justify-items-center"
+    >
+        <div class="w-full">
+        <p id="NumberContainer" class="text-center font-FasterOne text-[5vw]">
+            añadir jugador
+        </p>
+        </div>
+    </div>
+    </a>
 </div>
 {% endblock content %}

@@ -1,5 +1,4 @@
 from django import forms
-from .models import stadiumsModel
 
 
 class stadiumsRegisterForm(forms.Form):
@@ -14,3 +13,16 @@ class teamsRegisterForm(forms.Form):
     stadium = forms.CharField(max_length=30)
     nickname = forms.CharField( max_length=15)
     image = forms.ImageField()
+
+
+class playersRegisterForm(forms.Form):
+    name = forms.CharField(max_length=30)
+    team = forms.CharField(max_length=30,)
+    age = forms.CharField( max_length=3)
+    position = forms.CharField(max_length=20)
+    number = forms.CharField(max_length=2)
+    image = forms.ImageField()
+
+
+    def __str__(self):
+        return self.name

@@ -40,8 +40,8 @@ urlpatterns = [
     
     path('Jugadores', views.players, name="players_view"),
     path('RegistrarJugador', views.playersRegister, name="playersRegister_view"),
-    path('EditarJugador', views.playerEdit, name="palyerEdit_view"),
-    path('BorrarJugador', views.playerDelete, name="playerDelete_view"),
+    path('EditarJugador/<int:pk>', views.playerEdit, name="palyerEdit_view"),
+    path('BorrarJugador/<int:pk>', views.playerDelete, name="playerDelete_view"),
 
 
 ]

@@ -9,8 +9,8 @@ from urllib import response
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.contrib import messages
 
-from .forms import stadiumsRegisterForm, teamsRegisterForm
-from .models import stadiumsModel, teamsModel
+from .forms import playersRegisterForm, stadiumsRegisterForm, teamsRegisterForm
+from .models import playersModel, stadiumsModel, teamsModel
 # Create your views here.
 
 
@@ -35,20 +35,23 @@ def index(request):
     }
     return render(request, "pages/home/index.html", context)
 
-#-------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+
+
 def stadiums(request):
     stadium = stadiumsModel.objects.all()
     print(stadium)
-    
+
     context = {
         "cardItem": stadium
     }
     return render(request, "pages/stadiums/index.html", context)
 
+
 def stadiumsRegister(request):
     form = stadiumsRegisterForm()
     context = {
-        "form":form
+        "form": form
     }
     if request.method == 'POST':
         print('POST DETECTADO')
@@ -66,25 +69,26 @@ def stadiumsRegister(request):
             print('guardado')
             return redirect('/Estadios')
         else:
-            context={
-                "error":"Error al registrar"
+            context = {
+                "error": "Error al registrar"
             }
 
     return render(request, "pages/stadiumsRegister/index.html", context)
 
-def stadiumEdit(request,pk):
-    stadium = get_object_or_404(stadiumsModel,id=pk)
+
+def stadiumEdit(request, pk):
+    stadium = get_object_or_404(stadiumsModel, id=pk)
 
     print(stadium.image)
-    initialData= {
+    initialData = {
         "name": stadium.name,
-        "location":stadium.location,
-        "capacity":stadium.capacity,
-        "image":stadium.image
+        "location": stadium.location,
+        "capacity": stadium.capacity,
+        "image": stadium.image
     }
-    form= stadiumsRegisterForm(initialData)
-    context={
-        "form":form,
+    form = stadiumsRegisterForm(initialData)
+    context = {
+        "form": form,
     }
 
     if request.method == 'POST':
@@ -100,23 +104,26 @@ def stadiumEdit(request,pk):
             stadium.save();
             print('Actualizado')
         else:
-            context={
-                "error":"Error al actualizar"
+            context = {
+                "error": "Error al actualizar"
             }
-    return render(request,'pages/stadiumsEdit/index.html',context )
+    return render(request, 'pages/stadiumsEdit/index.html', context)
 
-def stadiumDelete(request,pk):
-    stadium = get_object_or_404(stadiumsModel,id=pk)
+
+def stadiumDelete(request, pk):
+    stadium = get_object_or_404(stadiumsModel, id=pk)
     if request.method == 'POST':
         print('se esta eliminando')
         stadium.delete()
         return redirect('/Estadios')
-    return render(request,'pages/stadiumsDelete/index.html',{} )
+    return render(request, 'pages/stadiumsDelete/index.html', {})
 
-#------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------
+
+
 def teams(request):
     teamItems = teamsModel.objects.all()
-    
+
     context = {
         "cardItem": teamItems
     }
@@ -125,15 +132,15 @@ def teams(request):
 
 def teamsRegister(request):
     stadiums = stadiumsModel.objects.all()
-    stadiumAvaibles =[]
+    stadiumAvaibles = []
     for stadium in stadiums:
         stadiumAvaibles.append(stadium.name)
 
     print(stadiumAvaibles)
     form = teamsRegisterForm()
     context = {
-        "form":form,
-        "stadiumsAvaible":stadiums
+        "form": form,
+        "stadiumsAvaible": stadiums
     }
     if request.method == 'POST':
         print('POST DETECTADO')
@@ -141,7 +148,8 @@ def teamsRegister(request):
         form = teamsRegisterForm(request.POST, files=request.FILES)
         print(form.data['stadium'])
         if form.is_valid():
-            stadiumObject = get_object_or_404(stadiumsModel, name=form.data['stadium'])
+            stadiumObject = get_object_or_404(
+                stadiumsModel, name=form.data['stadium'])
             team = teamsModel()
             team.name = form.cleaned_data['name']
             team.location = form.cleaned_data['location']
@@ -152,24 +160,25 @@ def teamsRegister(request):
             print('guardado')
             return redirect('/Equipos')
         else:
-            context={
-                "error":"Error al registrar"
+            context = {
+                "error": "Error al registrar"
             }
     return render(request, 'pages/teamsRegister/index.html', context)
 
-def teamEdit(request,pk):
-    team = get_object_or_404(teamsModel,id=pk)
+
+def teamEdit(request, pk):
+    team = get_object_or_404(teamsModel, id=pk)
     stadiumAvaibles = stadiumsModel.objects.all()
-    initialData= {
+    initialData = {
         "name": team.name,
-        "location":team.location,
-        "nickname":team.nickname,
-        "image":team.image
+        "location": team.location,
+        "nickname": team.nickname,
+        "image": team.image
     }
-    form= teamsRegisterForm(initialData)
-    context={
-        "form":form,
-        "stadiumsAvaible":stadiumAvaibles
+    form = teamsRegisterForm(initialData)
+    context = {
+        "form": form,
+        "stadiumsAvaible": stadiumAvaibles
     }
 
     if request.method == 'POST':
@@ -180,52 +189,34 @@ def teamEdit(request,pk):
             team.name = form.cleaned_data['name']
             team.location = form.cleaned_data['location']
             if team.stadium.name != form.cleaned_data['stadium']:
-                stadiumObject = get_object_or_404(stadiumsModel, name=form.data['stadium'])
+                stadiumObject = get_object_or_404(
+                    stadiumsModel, name=form.data['stadium'])
                 team.stadium = stadiumObject
             team.nickname = form.cleaned_data['nickname']
             team.image = form.cleaned_data['image']
             team.save();
             return redirect('/Equipos')
         else:
-            context={
-                "error":"Error al actualizar"
+            context = {
+                "error": "Error al actualizar"
             }
-    return render(request,'pages/teamsEdit/index.html',context )
+    return render(request, 'pages/teamsEdit/index.html', context)
 
-def teamDelete(request,pk):
+
+def teamDelete(request, pk):
     print(pk)
-    team = get_object_or_404(teamsModel,id=pk)
+    team = get_object_or_404(teamsModel, id=pk)
     if request.method == 'POST':
         print('se esta eliminando')
         team.delete()
         return redirect('/Equipos')
-    return render(request,'pages/teamsDelete/index.html',{} )
+    return render(request, 'pages/teamsDelete/index.html', {})
 
-#--------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
+
+
 def players(request):
-    playerItems = [
-        {
-            "name": "David de gea",
-            "team": "MANCHESTER UNITED",
-            "age": "28",
-            "position": "Portero",
-            "number": "7",
-        },
-        {
-            "name": "David de gea",
-            "team": "MANCHESTER UNITED",
-            "age": "28",
-            "position": "Portero",
-            "number": "7",
-        },
-        {
-            "name": "David de gea",
-            "team": "MANCHESTER UNITED",
-            "age": "28",
-            "position": "Portero",
-            "number": "7",
-        },
-    ]
+    playerItems = playersModel.objects.all()
     context = {
         "cardItem": playerItems
     }
@@ -233,15 +224,44 @@ def players(request):
 
 
 def playersRegister(request):
-    context = {
+    teams = teamsModel.objects.all()
+    if request.method == 'POST':
+        print('POST DETECTADO')
+        print(request.FILES)
+        form = playersRegisterForm(request.POST, files=request.FILES)
+        # print(form.data['stadium'])
+        if form.is_valid():
+            print('POST valido')
 
+            teamObject = get_object_or_404(teamsModel, name=form.data['team'])
+            player = playersModel()
+            player.name = form.cleaned_data['name']
+            player.team = teamObject
+            player.age = form.cleaned_data['age']
+            player.position = form.cleaned_data['position']
+            player.number = form.cleaned_data['number']
+            player.image = form.cleaned_data['image']
+            player.save()
+            print('guardado')
+            return redirect('/Jugadores')
+        else:
+            context = {
+                "error": "Error al registrar"
+            }
+    context = {
+        "form":form,
+        "teamsAvaible":teams
     }
     return render(request, 'pages/playersRegister/index.html', context)
 
-def playerEdit(request):
+def playerEdit(request, pk):
     print('Se esta editando el equipo')
     return render(request,'pages/playersEdit/index.html',{} )
 
-def playerDelete(request):
-    print('Se esta Borrando el equipo')
+def playerDelete(request, pk):
+    player = get_object_or_404(playersModel, id=pk)
+    if request.method == 'POST':
+        print('se esta eliminando')
+        player.delete()
+        return redirect('/Jugadores')
     return render(request,'pages/playersDelete/index.html',{} )
