@@ -1,0 +1,13 @@
+{% for item in cardItems %}
+<a id="CardContainer" class="w-[30vw]" href="{{item.title}}">
+  <div
+    class="relative border rounded-2xl flex flex-col items-center justify-center w-[30vw]"
+  >
+    <div class=" z-50 absolute rounded-2xl opacity-40 w-full h-full bg-black"></div>
+    <img id="CardImage" class=' z-10' src="{{item.imageSrc}}" alt="" />
+    <div class="absolute z-[60] text-white">
+      <p id="CardText" class= 'font-BebasKai'>{{item.title}}</p>
+    </div>
+  </div>
+</a>
+{% endfor %}

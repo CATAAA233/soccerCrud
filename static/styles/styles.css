@@ -1,0 +1,25 @@
+#CardImage {
+  width: 30vw;
+  height: 20vw;
+  object-fit: cover;
+  object-position: 50% 100%;
+  border-radius: 1rem;
+  transition: all 0.8s ease-in-out;
+}
+
+#CardText {
+  font-size: 3vw;
+}
+#CardContainer {
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 60px 50px -12px rgb(0 0 0 / 0.25)
+}
+#CardContainer:hover #CardImage {
+  transform: translateX(200px);
+  transform: scale(1.5);
+}
+
+#CardPlayerGrid{
+  grid-template-columns: 1fr 1fr 2fr;
+}

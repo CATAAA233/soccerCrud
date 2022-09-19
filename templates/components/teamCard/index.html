@@ -1,0 +1,38 @@
+{% for team in cardItem %}
+<div
+  id="CardPlayerGrid"
+  class="grid grid-cols-3 mb-10 flex-row bg-white w-[90vw] h-[25vw] px-[2rem] py-[1rem] items-center justify-items-center"
+>
+  <div class="border-r border-black w-full">
+    <p id="NumberContainer" class="text-center font-FasterOne text-[15vw]">1</p>
+  </div>
+  <div>
+    <div class="w-[18vw]">
+      <img src="static/images/player1.jpg" alt="" />
+    </div>
+  </div>
+  <div
+    class="border-l w-full h-full border-black px-5 font-BebasKai text-[2vw]"
+  >
+    <p class="text-[5vw] border-y border-black leading-[5vw]">
+      {{team.name}}
+    </p>
+    <p class="">UBICACIÓN: {{team.location}}</p>
+    <p class="">ESTADIO: {{team.stadium}}</p>
+    <p class="">APODO: {{team.nickname}}</p>
+
+  </div>
+</div>
+{% endfor %}
+<a href="RegistrarEquipo">
+  <div
+    id="CardPlayerGrid"
+    class="flex flex-row bg-white w-[90vw] h-[25vw] px-[2rem] py-[1rem] items-center justify-items-center"
+  >
+    <div class="w-full">
+      <p id="NumberContainer" class="text-center font-FasterOne text-[5vw]">
+        añadir equipo
+      </p>
+    </div>
+  </div>
+</a>

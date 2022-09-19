@@ -1,0 +1,47 @@
+{% for stadium in cardItem %}
+<div
+  id="CardPlayerGrid"
+  class="grid grid-cols-3 mb-10 flex-row bg-white w-[90vw] h-[25vw] px-[2rem] py-[1rem] items-center justify-items-center"
+>
+  <div class="border-r border-black w-full">
+    <p id="NumberContainer" class="text-center font-FasterOne text-[15vw]">1</p>
+  </div>
+  <div>
+    <div class="w-[18vw]">
+      <img src="static/images/player1.jpg" alt="" />
+    </div>
+  </div>
+  <div
+    class="border-l w-full h-full border-black px-5 font-BebasKai text-[2vw]"
+  >
+    <p class="text-[5vw] border-y border-black leading-[5vw]">
+      {{stadium.name}}
+    </p>
+    <p>UBICACIÓN: {{stadium.location}}</p>
+    <p>ESTADIO: {{stadium.stadium}}</p>
+    <p>APODO: {{stadium.nickname}}</p>
+    <a href='EditarEstadio'>
+      <div class="w-[3vw]">
+        <img src="static/images/editar.png" alt="" />
+      </div>
+    </a>
+    <a href="BorrarEstadio">
+      <div class="w-[3vw]">
+        <img src="static/images/editar.png" alt="" />
+      </div>
+    </a>
+  </div>
+</div>
+{% endfor %}
+<a href="RegistrarEstadio">
+  <div
+    id="CardPlayerGrid"
+    class="flex flex-row bg-white w-[90vw] h-[25vw] px-[2rem] py-[1rem] items-center justify-items-center"
+  >
+    <div class="w-full">
+      <p id="NumberContainer" class="text-center font-FasterOne text-[5vw]">
+        añadir estadio
+      </p>
+    </div>
+  </div>
+</a>

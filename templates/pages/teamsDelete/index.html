@@ -1,0 +1,29 @@
+{% extends 'pages/base/index.html' %}
+{% block title %}Eliminar Equipo{% endblock title %}
+{% block content %}
+<div class="flex flex-col h-full items-center overflow-scroll pt-10 ">
+    <div
+    class="grid grid-cols-1 w-[90vw] h-min py-[2rem] text-[1.5vw] bg-white justify-items-center font-BebasKai"
+    > 
+        <form method= "POST" enctype="multipart/form-data">{% csrf_token %}
+            <div id="title">
+            <p class="text-[5vw] leading-[5vw]">ELIMINAR EQUIPO</p>
+            </div>
+
+            <div id="fields" class="mt-[2vw]">
+                <div class="w-full">
+                    <p>¿Seguro que quieres eliminar el estadio?</p>
+                </div>            
+            </div>
+
+            <div class=' flex flex-col'>
+                <button class="w-full h-[4vw] bg-black mt-[2vw] text-white">Aceptar</button>
+                <button class="w-full h-[4vw] bg-red-700 mt-[2vw] text-white">Cancelar</button>
+            </div>
+
+
+            <p> {{error}}</p>
+        </form>
+    </div>
+</div>
+{% endblock content %}

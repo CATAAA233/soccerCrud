@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'BebasKai';
+    src: url(/static/styles/BebasKai.ttf);
+}
+
+@font-face {
+    font-family: 'FasterOne';
+    src: url(/static/styles/FasterOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'FugazOne';
+    src: url(static/styles/FugazOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url(static/styles/Nunito-VariableFont_wght.ttf);
+}

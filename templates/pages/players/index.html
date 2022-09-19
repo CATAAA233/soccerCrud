@@ -1,0 +1,9 @@
+{% extends 'pages/base/index.html' %}
+
+{% block title %}Jugadores{% endblock title %}
+{% block content %}
+
+<div class="flex flex-col h-full items-center overflow-scroll pt-10 ">
+    {% include 'components/playerCard/index.html' %}
+</div>
+{% endblock content %}

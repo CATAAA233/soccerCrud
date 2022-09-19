@@ -1,0 +1,28 @@
+{% extends 'components/registerForm/index.html' %}
+{% block title %} Registro de jugadores{% endblock title %}
+{% block fields %}
+  <div class="w-full">
+    <p>Nombre</p>
+    <input class="w-full" type="text" />
+  </div>
+  <div class="w-full">
+    <p>Equipo</p>
+    <select class="w-full" name="stadium" id="stadium">
+      {% for option in stadiumsAvaible %}
+      <option value="stadium">{{option.name | upper}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="w-full">
+    <p>EDAD</p>
+    <input class="w-full" type="text" />
+  </div>
+  <div class="w-full">
+    <p>POSISIÓN</p>
+    <input class="w-full" type="text" />
+  </div>
+  <div class="w-full">
+    <p>NUMERO DE CAMISETA</p>
+    <input class="w-full" type="text" />
+  </div>
+{% endblock fields %}

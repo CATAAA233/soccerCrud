@@ -1,0 +1,32 @@
+<div
+  class="grid grid-cols-1 w-[90vw] h-min py-[2rem] text-[1.5vw] bg-white justify-items-center font-BebasKai"
+> 
+  <form method= "POST" enctype="multipart/form-data">{% csrf_token %}
+    <div id="title">
+      <p class="text-[5vw] leading-[5vw]">Registro de estadios</p>
+    </div>
+
+    <div id="fields" class="mt-[2vw]">
+        <div class="w-full">
+            <p>Nombre del Estadio</p>
+            <input class="w-full" type="text" name="name" />
+        </div>
+        <div class="w-full">
+            <p>Ubicación</p>
+            <input class="w-full" type="text" name="location"/>
+        </div>
+        <div class="w-full">
+            <p>Capacidad</p>
+            <input class="w-full" type="text" name="capacity"/>
+        </div>
+        <div class="w-full">
+            <p>Foto</p>
+            <input id="file-select" type="file" name="image" accept="image/jpeg, image/png">
+        </div>
+    </div>
+
+    <button class="w-full h-[4vw] bg-red-700 mt-[2vw] text-white">Registrar</button>
+
+    <p> {{error}}</p>
+  </form>
+</div>

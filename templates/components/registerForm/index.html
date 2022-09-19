@@ -1,0 +1,15 @@
+<div
+  class="grid grid-cols-1 w-[90vw] h-min py-[2rem] text-[1.5vw] bg-white justify-items-center font-BebasKai"
+> 
+  <form action=''  method= "POST">{% csrf_token %}
+    <div id="title">
+      <p class="text-[5vw] leading-[5vw]">{% block title %}{% endblock title %}</p>
+    </div>
+
+    <div id="fields" class="mt-[2vw]">
+        {% block fields %}{% endblock fields %}
+    </div>
+
+    <button class="w-full h-[4vw] bg-red-700 mt-[2vw] text-white">Registrar</button>
+  </form>
+</div>
