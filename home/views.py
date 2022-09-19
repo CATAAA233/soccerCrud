@@ -1,4 +1,5 @@
 from ast import If
+from copyreg import constructor
 from http.client import REQUEST_ENTITY_TOO_LARGE
 from mimetypes import init
 from multiprocessing import context
@@ -157,8 +158,39 @@ def teamsRegister(request):
     return render(request, 'pages/teamsRegister/index.html', context)
 
 def teamEdit(request,pk):
-    print('Se esta editando el equipo')
-    return render(request,'pages/teamsEdit/index.html',{} )
+    team = get_object_or_404(teamsModel,id=pk)
+    stadiumAvaibles = stadiumsModel.objects.all()
+    initialData= {
+        "name": team.name,
+        "location":team.location,
+        "nickname":team.nickname,
+        "image":team.image
+    }
+    form= teamsRegisterForm(initialData)
+    context={
+        "form":form,
+        "stadiumsAvaible":stadiumAvaibles
+    }
+
+    if request.method == 'POST':
+        print(request.FILES)
+        form = teamsRegisterForm(request.POST, files=request.FILES)
+
+        if form.is_valid():
+            team.name = form.cleaned_data['name']
+            team.location = form.cleaned_data['location']
+            if team.stadium.name != form.cleaned_data['stadium']:
+                stadiumObject = get_object_or_404(stadiumsModel, name=form.data['stadium'])
+                team.stadium = stadiumObject
+            team.nickname = form.cleaned_data['nickname']
+            team.image = form.cleaned_data['image']
+            team.save();
+            return redirect('/Equipos')
+        else:
+            context={
+                "error":"Error al actualizar"
+            }
+    return render(request,'pages/teamsEdit/index.html',context )
 
 def teamDelete(request,pk):
     print(pk)

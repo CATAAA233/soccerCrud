@@ -1,4 +1,46 @@
 {% extends 'pages/base/index.html' %}
 {% block title %}Editar Equipo{% endblock title %}
 {% block content %}
+<div class="flex flex-col h-full items-center pt-10 ">
+    <div
+        class="grid grid-cols-1 w-[90vw] h-min py-[2rem] text-[1.5vw] bg-white justify-items-center font-BebasKai"
+    > 
+        <div>
+            <div id="title">
+                <p class="text-center text-[5vw] leading-[5vw]">Editar equipo</p>
+            </div>
+            <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+               
+                <div id="fields" class="mt-[2vw]">
+                    <div class="w-full">
+                      <p>Nombre del equipo</p>
+                      <input class="w-full" type="text" name="name" value="{{form.name.value}}"/>
+                    </div>
+                    <div class="w-full">
+                      <p>Ubicación</p>
+                      <input class="w-full" type="text" name="location" value="{{form.location.value}}" />
+                    </div>
+                    <div class="w-full">
+                      <p>Estadio</p>
+                      <select class="w-full" name="stadium">
+                        {% for option in stadiumsAvaible %}
+                            <option value="{{option.name}}">{{option.name | upper}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="w-full" name="nickname">
+                      <p>Apodo</p>
+                      <input class="w-full" type="text" name="nickname" value="{{form.nickname.value}}" />
+                    </div> 
+                    <div class="w-full">
+                      <p>Foto</p>
+                      <input id="file-select" type="file" name="image" accept="image/jpeg, image/png" value='hola' >
+                    </div>     
+                <button class="w-full h-[4vw] bg-red-700 mt-[2vw] text-white">Registrar</button>
+                
+                <p> {{error}}</p>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
