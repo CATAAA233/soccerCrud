@@ -229,7 +229,6 @@ def playersRegister(request):
         print('POST DETECTADO')
         print(request.FILES)
         form = playersRegisterForm(request.POST, files=request.FILES)
-        # print(form.data['stadium'])
         if form.is_valid():
             print('POST valido')
 
@@ -249,14 +248,47 @@ def playersRegister(request):
                 "error": "Error al registrar"
             }
     context = {
-        "form":form,
         "teamsAvaible":teams
     }
     return render(request, 'pages/playersRegister/index.html', context)
 
 def playerEdit(request, pk):
-    print('Se esta editando el equipo')
-    return render(request,'pages/playersEdit/index.html',{} )
+    player = get_object_or_404(playersModel, id=pk)
+    teamsAvaible = teamsModel.objects.all()
+    initialData = {
+        "name": player.name,
+        "team": player.team,
+        "age": player.age,
+        "position": player.position,
+        "number": player.number,
+        "image": player.image
+    }
+    form = playersRegisterForm(initialData)
+    context = {
+        "form": form,
+        "teamsAvaible": teamsAvaible
+    }
+
+    if request.method == 'POST':
+        form = playersRegisterForm(request.POST, files=request.FILES)
+        if form.is_valid():
+            print('es valido')
+            player.name = form.cleaned_data['name']
+            if player.team.name != form.cleaned_data['team']:
+                teamObject = get_object_or_404(
+                    teamsModel, name=form.data['team'])
+                player.team = teamObject
+            player.age = form.cleaned_data['age']
+            player.position = form.cleaned_data['position']
+            player.number = form.cleaned_data['number']
+            player.image = form.cleaned_data['image']
+            player.save();
+            return redirect('/Jugadores')
+        else:
+            context = {
+                "error": "Error al actualizar"
+            }
+    return render(request,'pages/playersEdit/index.html',context )
 
 def playerDelete(request, pk):
     player = get_object_or_404(playersModel, id=pk)

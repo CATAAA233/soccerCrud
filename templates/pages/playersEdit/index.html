@@ -1,6 +1,49 @@
 {% extends 'pages/base/index.html' %}
 {% block title %}Editar Jugador{% endblock title %}
 {% block content %}
-
+<div class="flex flex-col h-full items-center overflow-scroll pt-10 ">
+    <div
+        class="grid grid-cols-1 w-[90vw] h-min py-[2rem] text-[1.5vw] bg-white justify-items-center font-BebasKai"
+    > 
+        <div>
+            <div id="title">
+                <p class=" text-center} text-[5vw] leading-[5vw]">Editar de jugador</p>
+            </div>
+            <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+              <div class="w-full">
+                <p>Nombre</p>
+                <input class="w-full" type="text" name="name" value="{{form.data.name}}"/>
+              </div> 
+              <div class="w-full">
+                <p>Equipo</p>
+                <select class="w-full" name="team">
+                  {% for option in teamsAvaible %}
+                  <option value="{{option.name}}">{{option.name | upper}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="w-full">
+                <p>Edad</p>
+                <input class="w-full" type="text" name="age" value="{{form.data.age}}"/>
+              </div>
+              <div class="w-full" name="nickname">
+                <p>Posición</p>
+                <input class="w-full" type="text" name="position" value="{{form.data.position}}"/>
+              </div> 
+              <div class="w-full" name="nickname">
+                  <p>Numero de camiseta</p>
+                  <input class="w-full" type="text" name="number" value="{{form.data.number}}"/>
+                </div> 
+              <div class="w-full">
+                <p>Foto</p>
+                <input id="file-select" type="file" name="image" accept="image/jpeg, image/png">
+              </div>   
+                    
+                <button class="w-full h-[4vw] bg-red-700 mt-[2vw] text-white">Registrar</button>
+                <p> {{error}}</p>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

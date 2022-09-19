@@ -22,7 +22,3 @@ class playersRegisterForm(forms.Form):
     position = forms.CharField(max_length=20)
     number = forms.CharField(max_length=2)
     image = forms.ImageField()
-
-
-    def __str__(self):
-        return self.name
