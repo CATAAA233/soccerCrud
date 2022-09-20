@@ -22,7 +22,13 @@
         {{team.name}}
         </p>
         <p class="">UBICACIÓN: {{team.location}}</p>
-        <p class="">ESTADIO: {{team.stadium}}</p>
+        <p class="">ESTADIO: 
+            {%if not team.stadium%}
+                No tiene estadio
+            {%else %}
+                {{team.stadium}}
+            {% endif %}    
+        </p>
         <p class="">APODO: {{team.nickname}}</p>
         <div class='flex flex-row justify-end'>
             <a href="{{'EditarEquipo/'}}{{team.pk}}">

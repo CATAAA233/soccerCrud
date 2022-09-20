@@ -23,7 +23,7 @@ class stadiumsModel(models.Model):
 class teamsModel(models.Model):
     name = models.CharField(max_length=30)
     location = models.CharField(max_length=50)
-    stadium = models.ForeignKey(stadiumsModel, on_delete=models.CASCADE)
+    stadium = models.ForeignKey(stadiumsModel,null=True,blank=True, on_delete=models.SET_NULL)
     nickname = models.CharField(max_length=15)
     image = models.ImageField(null=True, blank=True)
 
@@ -32,7 +32,7 @@ class teamsModel(models.Model):
 
 class playersModel(models.Model):
     name = models.CharField(max_length=30)
-    team = models.ForeignKey(teamsModel, on_delete=models.CASCADE)
+    team = models.ForeignKey(teamsModel, null=True, blank=True, on_delete=models.SET_NULL)
     age = models.CharField( max_length=3)
     position = models.CharField(max_length=20)
     number = models.CharField(max_length=2)

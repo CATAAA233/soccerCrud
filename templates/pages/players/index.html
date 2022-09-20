@@ -23,7 +23,14 @@
         <p class="text-[5vw] border-y border-black leading-[5vw]">
         {{player.name}}
         </p>
-        <p class="">EQUIPO: {{player.team}}</p>
+        <p class="">
+            EQUIPO: 
+            {%if not player.team%}
+                No tiene equipo
+            {%else%}
+                {{player.team}}
+            {% endif %}
+        </p>
         <p class="">EDAD: {{player.age}}</p>
         <p class="">Posicion: {{player.position}}</p>
         <p class="">Numero de camiseta: {{player.number}}</p>

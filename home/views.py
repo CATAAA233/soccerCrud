@@ -188,10 +188,8 @@ def teamEdit(request, pk):
         if form.is_valid():
             team.name = form.cleaned_data['name']
             team.location = form.cleaned_data['location']
-            if team.stadium.name != form.cleaned_data['stadium']:
-                stadiumObject = get_object_or_404(
-                    stadiumsModel, name=form.data['stadium'])
-                team.stadium = stadiumObject
+            stadiumObject = get_object_or_404(stadiumsModel, name=form.data['stadium'])
+            team.stadium = stadiumObject
             team.nickname = form.cleaned_data['nickname']
             team.image = form.cleaned_data['image']
             team.save();
@@ -274,10 +272,8 @@ def playerEdit(request, pk):
         if form.is_valid():
             print('es valido')
             player.name = form.cleaned_data['name']
-            if player.team.name != form.cleaned_data['team']:
-                teamObject = get_object_or_404(
-                    teamsModel, name=form.data['team'])
-                player.team = teamObject
+            teamObject = get_object_or_404(teamsModel, name=form.data['team'])
+            player.team = teamObject
             player.age = form.cleaned_data['age']
             player.position = form.cleaned_data['position']
             player.number = form.cleaned_data['number']
